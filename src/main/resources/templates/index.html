@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestione Dati</title>
+</head>
+<body>
+    <h1>Inserisci un dato</h1>
+    <form action="/save" method="post">
+        <input type="text" name="valore" placeholder="Scrivi qui"/>
+        <button type="submit">Salva in Redis</button>
+    </form>
+
+    <h2>Azioni</h2>
+    <form action="/move-to-postgres" method="get">
+        <button type="submit">Sposta in Postgres</button>
+    </form>
+    <form action="/move-to-redis" method="get">
+        <button type="submit">Sposta in Redis</button>
+    </form>
+    
+    <h2>Risultati Redis</h2>
+    <ul>
+        <li th:each="item : ${redis}" th:text="${item}">Dato</li>
+    </ul>
+    <h2>Risultati Postgres</h2>
+    <ul>
+        <li th:each="item : ${postgres}" th:text="${item}">Dato</li>
+    </ul>
+</body>
+</html>
