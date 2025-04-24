@@ -50,8 +50,8 @@ services:
     container_name: keycloak
     restart: always
     environment:
-      - KEYCLOAK_USER=${KEYCLOAK_ADMIN_USER}  # Admin user for Keycloak
-      - KEYCLOAK_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}  # Admin password for Keycloak
+      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN_USER}  # Admin user for Keycloak
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}  # Admin password for Keycloak
       - DB_VENDOR=postgres
       - DB_ADDR=postgres  # Hostname of the postgres service
       - DB_DATABASE=auth  # Name of the Keycloak database
