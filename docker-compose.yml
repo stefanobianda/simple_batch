@@ -57,6 +57,7 @@ services:
       - DB_DATABASE=auth  # Name of the Keycloak database
       - DB_USER=${POSTGRES_USER}  # Postgres user
       - DB_PASSWORD=${POSTGRES_PASSWORD}  # Postgres password
+    command: start-dev
     ports:
       - "8080:8080"  # Exposing Keycloak on port 8080
     depends_on:
