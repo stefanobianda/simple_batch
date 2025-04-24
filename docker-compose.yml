@@ -7,6 +7,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - keycloak
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_PORT=${POSTGRES_PORT}
@@ -43,6 +44,23 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     volumes:
       - redis_data:/data
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    restart: always
+    environment:
+      - KEYCLOAK_USER=${KEYCLOAK_ADMIN_USER}  # Admin user for Keycloak
+      - KEYCLOAK_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}  # Admin password for Keycloak
+      - DB_VENDOR=postgres
+      - DB_ADDR=postgres  # Hostname of the postgres service
+      - DB_DATABASE=auth  # Name of the Keycloak database
+      - DB_USER=${POSTGRES_USER}  # Postgres user
+      - DB_PASSWORD=${POSTGRES_PASSWORD}  # Postgres password
+    ports:
+      - "8080:8080"  # Exposing Keycloak on port 8080
+    depends_on:
+      - postgres
 
 
 volumes:
